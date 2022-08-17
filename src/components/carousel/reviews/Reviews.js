@@ -19,9 +19,6 @@ export const Reviews = (props) => {
 	return (
 		<Container>
 			<br />
-			<br />
-			<br />
-			<br />
 			<Row className='justify-content-center'>
 				<Col md={8} xs={12}>
 					<Slider {...settings}>

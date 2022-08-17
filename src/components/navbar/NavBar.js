@@ -9,6 +9,7 @@ import {
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faCartPlus } from "@fortawesome/fontawesome-free-solid";
+import "./NavBar.css";
 
 /**
  * @author
@@ -18,15 +19,19 @@ import { faUser, faCartPlus } from "@fortawesome/fontawesome-free-solid";
 export const NavBar = (props) => {
 	return (
 		<>
-			<Navbar bg='light' expand='md' className='mb-3'>
+			<Navbar bg='light' expand='md' className='mb-3 pt-3'>
 				<Container fluid>
 					<Navbar.Brand href='#'>
-						<b>MANSHAA </b>
 						<Image
+							style={{ marginTop: "-17px" }}
 							width={50}
-							height={50}
+							height={40}
 							fluid
 							src={require("../../assets/images/manshaa.png")}></Image>
+						<span>
+							{" "}
+							<b className>ANSHAA </b>
+						</span>
 					</Navbar.Brand>
 					<Navbar.Toggle aria-controls={`offcanvasNavbar-expand-xs`} />
 					<Navbar.Offcanvas
@@ -44,8 +49,9 @@ export const NavBar = (props) => {
 							</Offcanvas.Title>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
-							<Nav className='justify-content-around flex-grow-1 pe-3'>
+							<Nav className='justify-content-center flex-grow-1 pe-3'>
 								<NavDropdown
+									style={{ right: "30px" }}
 									title='Men COLLECTIONS'
 									id={`offcanvasNavbarDropdown-expand-xs`}>
 									<NavDropdown.Item className='text-center' href='#action3'>
@@ -82,6 +88,7 @@ export const NavBar = (props) => {
 									</NavDropdown.Item>
 								</NavDropdown>
 								<NavDropdown
+									style={{ left: "30px" }}
 									title='JEWELRY COLLECTIONS'
 									id={`offcanvasNavbarDropdown-expand-xs`}>
 									<NavDropdown.Item className='text-center' href='#action3'>
@@ -103,10 +110,6 @@ export const NavBar = (props) => {
 										MATHA PATTI & MANGTIKKA
 									</NavDropdown.Item>
 								</NavDropdown>
-
-								<FontAwesomeIcon size='lg' icon={faCartPlus} />
-								<br />
-								<FontAwesomeIcon size='lg' icon={faUser} />
 							</Nav>
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>

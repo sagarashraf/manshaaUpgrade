@@ -2,6 +2,7 @@ import React from "react";
 import { Container } from "react-bootstrap";
 import { CarouselItems } from "./components/carousel/CarouselItems";
 import { Reviews } from "./components/carousel/reviews/Reviews";
+import { Footer } from "./components/footer/Footer";
 import { NavBar } from "./components/navbar/NavBar";
 import { Threeoptions } from "./components/threeOptions/Threeoptions";
 
@@ -17,6 +18,7 @@ export const App = (props) => {
 			<CarouselItems />
 			<Threeoptions />
 			<Reviews />
+			<Footer />
 		</Container>
 	);
 };

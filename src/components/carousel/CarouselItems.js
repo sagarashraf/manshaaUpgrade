@@ -9,7 +9,7 @@ import { Carousel } from "react-responsive-carousel";
  **/
 export const CarouselItems = (props) => {
 	return (
-		<Container fluid>
+		<div>
 			<Carousel autoPlay={true} showThumbs={false} infiniteLoop={true}>
 				<div>
 					<img
@@ -33,6 +33,6 @@ export const CarouselItems = (props) => {
 					<p className='legend'>Legend 3</p>
 				</div>
 			</Carousel>{" "}
-		</Container>
+		</div>
 	);
 };

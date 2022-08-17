@@ -10,16 +10,15 @@ export const Threeoptions = (props) => {
 	return (
 		<div>
 			<br />
-			<br />
-			<br />
 			<hr />
 			<br />
 			<br />
 			<Row className='text-center justify-content-center'>
-				<Col sm={3} xs={11}>
+				<Col sm={4} xs={11} className='px-md-5 px-sm-1'>
 					{" "}
-					<Card>
+					<Card className='h-100 shadow'>
 						<Card.Img
+							className='h-100'
 							variant='top'
 							src='https://i.ibb.co/grcF585/9-B120447-4-E2-B-45-BA-9801-BCCD2-E4-AF8-D8.jpg'
 						/>
@@ -32,8 +31,8 @@ export const Threeoptions = (props) => {
 						</Card.Body>
 					</Card>
 				</Col>
-				<Col sm={3} xs={11}>
-					<Card className='h-100'>
+				<Col sm={4} xs={11} className='px-md-5 px-sm-1'>
+					<Card className='h-100 shadow'>
 						<Card.Img
 							className='h-100'
 							variant='top'
@@ -48,8 +47,8 @@ export const Threeoptions = (props) => {
 						</Card.Body>
 					</Card>
 				</Col>
-				<Col sm={3} xs={11}>
-					<Card className='h-100'>
+				<Col sm={4} xs={11} className='px-md-5 px-sm-1'>
+					<Card className='h-100 shadow'>
 						<Card.Img
 							className='h-100'
 							variant='top'
