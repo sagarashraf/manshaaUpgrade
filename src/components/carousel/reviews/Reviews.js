@@ -23,7 +23,7 @@ export const Reviews = (props) => {
 			<br />
 			<br />
 			<Row className='justify-content-center'>
-				<Col xs={8}>
+				<Col md={8} xs={12}>
 					<Slider {...settings}>
 						<div>
 							<img src='https://i.ibb.co/4S0Stp5/review1.png'></img>
