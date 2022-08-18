@@ -13,7 +13,7 @@ export const ReviewsCard = (props) => {
 	let URL = props.avatars;
 	return (
 		<div>
-			<Card className='mb-5 mt-4 card-height'>
+			<Card className='mb-5 mt-4 card-height-review'>
 				<Card.Header className='card-header'>
 					<h5>{props.name}</h5>
 				</Card.Header>
