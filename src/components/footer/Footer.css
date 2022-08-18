@@ -7,19 +7,25 @@
 	border-radius: 50%;
 	width: 60px;
 	height: 60px;
+	color: white;
 }
 .footer-icon-text-fs {
 	font-size: 20px;
 	font-weight: bolder;
 	font-style: italic;
+	color: white;
 }
 
 .footer-icon-text-social {
 	font-size: 18px;
 	font-weight: bolder;
+	color: white;
 }
 .footer-icon-social {
 	height: 30px;
 	width: 30px;
 	border-radius: 10px;
+}
+.footer-theme {
+	background-color: #88745c !important;
 }

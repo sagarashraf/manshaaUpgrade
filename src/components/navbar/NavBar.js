@@ -19,7 +19,7 @@ import "./NavBar.css";
 export const NavBar = (props) => {
 	return (
 		<>
-			<Navbar bg='light' expand='md' className='mb-3 pt-3'>
+			<Navbar expand='md' className='mb-3 pt-3 nav-color'>
 				<Container fluid>
 					<Navbar.Brand href='#'>
 						<Image

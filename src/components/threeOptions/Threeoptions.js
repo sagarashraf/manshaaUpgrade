@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Card } from "react-bootstrap";
+import "./Threeoptions.css";
 
 /**
  * @author
@@ -16,7 +17,7 @@ export const Threeoptions = (props) => {
 			<Row className='text-center justify-content-center'>
 				<Col sm={4} xs={11} className='px-md-5 px-sm-1'>
 					{" "}
-					<Card className='h-100 shadow'>
+					<Card className='h-100 card-design'>
 						<Card.Img
 							className='h-100'
 							variant='top'
@@ -32,7 +33,7 @@ export const Threeoptions = (props) => {
 					</Card>
 				</Col>
 				<Col sm={4} xs={11} className='px-md-5 px-sm-1'>
-					<Card className='h-100 shadow'>
+					<Card className='h-100 card-design'>
 						<Card.Img
 							className='h-100'
 							variant='top'
@@ -48,7 +49,7 @@ export const Threeoptions = (props) => {
 					</Card>
 				</Col>
 				<Col sm={4} xs={11} className='px-md-5 px-sm-1'>
-					<Card className='h-100 shadow'>
+					<Card className='h-100 card-design'>
 						<Card.Img
 							className='h-100'
 							variant='top'

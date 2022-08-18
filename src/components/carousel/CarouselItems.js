@@ -9,8 +9,12 @@ import { Carousel } from "react-responsive-carousel";
  **/
 export const CarouselItems = (props) => {
 	return (
-		<div>
-			<Carousel autoPlay={true} showThumbs={false} infiniteLoop={true}>
+		<div className='mt-5'>
+			<Carousel
+				className='slide-styling'
+				autoPlay={true}
+				showThumbs={false}
+				infiniteLoop={true}>
 				<div>
 					<img
 						className='image-class '

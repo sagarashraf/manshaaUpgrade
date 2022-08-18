@@ -16,7 +16,7 @@ import "./Footer.css";
 
 export const Footer = (props) => {
 	return (
-		<Card>
+		<Card className='footer-theme'>
 			<Card.Body>
 				<Row className='pt-5'>
 					<Col sm={4} xs={12} className='text-center'>
@@ -24,7 +24,7 @@ export const Footer = (props) => {
 							className='footer-image'
 							src='https://i.ibb.co/sb7KpyP/Profile-Circle.jpg'></Image>
 					</Col>
-					<Col sm={5} xs={12}>
+					<Col sm={4} xs={12}>
 						<div className='mb-2'>
 							<Image
 								style={{ marginRight: "15px" }}
@@ -53,7 +53,7 @@ export const Footer = (props) => {
 							</span>
 						</div>
 					</Col>
-					<Col sm={3} xs={12} className='pt-3'>
+					<Col sm={4} xs={12} className='pt-3'>
 						<div className='mb-3'>
 							<Image
 								style={{ marginRight: "15px" }}

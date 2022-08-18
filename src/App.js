@@ -13,12 +13,14 @@ import { Threeoptions } from "./components/threeOptions/Threeoptions";
 
 export const App = (props) => {
 	return (
-		<Container fluid>
+		<div>
 			<NavBar />
-			<CarouselItems />
-			<Threeoptions />
-			<Reviews />
-			<Footer />
-		</Container>
+			<Container fluid>
+				<CarouselItems />
+				<Threeoptions />
+				<Reviews />
+				<Footer />
+			</Container>
+		</div>
 	);
 };
