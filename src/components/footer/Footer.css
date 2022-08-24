@@ -1,7 +1,7 @@
 .footer-image {
 	border-radius: 50%;
-	width: 75%;
-	height: 75%;
+	width: 60%;
+	height: 60%;
 }
 .footer-image-icons {
 	border-radius: 50%;
@@ -28,4 +28,5 @@
 }
 .footer-theme {
 	background-color: #88745c !important;
+	border-radius: 0% !important;
 }

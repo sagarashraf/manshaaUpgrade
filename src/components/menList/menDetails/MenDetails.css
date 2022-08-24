@@ -1,0 +1,73 @@
+.card-detail-image {
+	background-color: transparent !important;
+	border: 1px solid gold !important;
+	border-radius: 0%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	width: 80%;
+}
+.image-class-detail {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	height: 30rem;
+	width: 100%;
+}
+.details-text {
+	height: 13.4rem;
+	text-align: center;
+	letter-spacing: 1px;
+	padding-top: 12px;
+	font-size: 18px;
+	font-weight: 600;
+}
+.add-cart {
+	width: 60%;
+	border-radius: 15px !important;
+	background-color: #c2b5a1 !important ;
+	border: 1px black solid !important;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-size: 16px !important;
+	letter-spacing: 2px;
+	font-weight: 600 !important;
+}
+.select-buttons-details {
+	width: 40%;
+	border-radius: 15px !important;
+	background-color: #c2b5a1 !important ;
+	border: 1px black solid !important;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	font-size: 16px !important;
+	letter-spacing: 2px;
+	font-weight: 600 !important;
+}
+.ruler-class {
+	width: 100%;
+	height: 20px;
+	border-bottom: 1px solid black;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.text-ruler {
+	font-size: 25px;
+	background-color: #86775f !important ;
+	color: white;
+	padding: 0 10px;
+}
+
+.hr-sect {
+	display: flex;
+	flex-basis: 100%;
+	align-items: center;
+	color: rgba(0, 0, 0, 0.35);
+	margin: 8px 0px;
+}
+.hr-sect:before,
+.hr-sect:after {
+	content: "";
+	flex-grow: 1;
+	background: rgba(0, 0, 0, 0.35);
+	height: 1px;
+	font-size: 0px;
+	line-height: 0px;
+	margin: 0px 8px;
+}

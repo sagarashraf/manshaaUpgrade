@@ -18,13 +18,13 @@ export const Footer = (props) => {
 	return (
 		<Card className='footer-theme'>
 			<Card.Body>
-				<Row className='pt-5'>
-					<Col sm={4} xs={12} className='text-center'>
+				<Row className='pt-5 '>
+					<Col sm={4} xs={12} className='text-center h-100'>
 						<Image
 							className='footer-image'
 							src='https://i.ibb.co/sb7KpyP/Profile-Circle.jpg'></Image>
 					</Col>
-					<Col sm={4} xs={12}>
+					<Col sm={4} xs={12} className='h-100 pt-3'>
 						<div className='mb-2'>
 							<Image
 								style={{ marginRight: "15px" }}
@@ -53,7 +53,7 @@ export const Footer = (props) => {
 							</span>
 						</div>
 					</Col>
-					<Col sm={4} xs={12} className='pt-3'>
+					<Col sm={4} xs={12} className='pt-4 h-100'>
 						<div className='mb-3'>
 							<Image
 								style={{ marginRight: "15px" }}

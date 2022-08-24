@@ -49,9 +49,8 @@ export const NavBar = (props) => {
 							</Offcanvas.Title>
 						</Offcanvas.Header>
 						<Offcanvas.Body>
-							<Nav className='justify-content-center flex-grow-1 pe-3'>
+							<Nav className='justify-content-around flex-grow-1 pe-3'>
 								<NavDropdown
-									style={{ right: "30px" }}
 									title='Men COLLECTIONS'
 									id={`offcanvasNavbarDropdown-expand-xs`}>
 									<NavDropdown.Item className='text-center' href='#action3'>
@@ -88,7 +87,6 @@ export const NavBar = (props) => {
 									</NavDropdown.Item>
 								</NavDropdown>
 								<NavDropdown
-									style={{ left: "30px" }}
 									title='JEWELRY COLLECTIONS'
 									id={`offcanvasNavbarDropdown-expand-xs`}>
 									<NavDropdown.Item className='text-center' href='#action3'>
@@ -110,6 +108,10 @@ export const NavBar = (props) => {
 										MATHA PATTI & MANGTIKKA
 									</NavDropdown.Item>
 								</NavDropdown>
+								<div className='ml-5 d-flex '>
+									<div style={{ width: "200px" }}>sdf</div>
+									<div className='w-50'>dsfs</div>
+								</div>
 							</Nav>
 						</Offcanvas.Body>
 					</Navbar.Offcanvas>
