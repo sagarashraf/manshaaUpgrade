@@ -1,3 +1,11 @@
 .width-custom-class {
 	width: 45% !important;
 }
+.summary-grids {
+	flex-wrap: wrap;
+	flex-direction: row;
+	display: flex;
+}
+.summary-grides-width {
+	width: 50%;
+}

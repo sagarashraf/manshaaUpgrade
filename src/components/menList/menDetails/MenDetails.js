@@ -5,16 +5,19 @@ import { useParams } from "react-router-dom";
 import { ColorModal } from "../../common/ColorModal";
 import { MeasurementModal } from "../../common/MeasurementModal";
 import "./MenDetails.css";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/CartBucketAction";
 /**
  * @author
  * @function MenDetails
  **/
 
 export const MenDetails = (props) => {
+	const dispatched = useDispatch();
 	const [details, setDetails] = useState([]);
 	const [modalShow, setModalShow] = useState(false);
 	const params = useParams();
+
 	useEffect(() => {
 		// declare the data fetching function
 		const fetchData = async () => {
@@ -63,15 +66,13 @@ export const MenDetails = (props) => {
 									variant='secondary'>
 									Add Measuremnt
 								</Button>
-								<Button className='select-buttons-details ' variant='secondary'>
+								<Button
+									onClick={() => dispatched(addToCart(details))}
+									className='select-buttons-details '
+									variant='secondary'>
 									Add to Cart $ {details.price}
 								</Button>
 							</div>
-							{/* <div className='text-center mt-2'>
-								<Button className='add-cart' variant='secondary'>
-									Select Size
-								</Button>
-							</div> */}
 
 							<div class='hr-sect'>
 								<Image

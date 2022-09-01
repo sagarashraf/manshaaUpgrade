@@ -9,7 +9,6 @@ import "./ReviewsCard.css";
  **/
 
 export const ReviewsCard = (props) => {
-	console.log(props.avatars);
 	let URL = props.avatars;
 	return (
 		<Row>

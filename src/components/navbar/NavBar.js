@@ -8,15 +8,27 @@ import {
 	Image,
 } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faCartPlus } from "@fortawesome/fontawesome-free-solid";
+import {
+	faUser,
+	faCartPlus,
+	faCartArrowDown,
+} from "@fortawesome/fontawesome-free-solid";
 import "./NavBar.css";
-
+import { navigationPaths } from "../../constants/navigation";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 /**
  * @author
  * @function NavBar
  **/
-
 export const NavBar = (props) => {
+	const nagivate = useNavigate();
+
+	function handleChange(value) {
+		nagivate(value);
+	}
+	const result = useSelector((state) => state.cartBucket);
+	console.log("redux full state", result);
 	return (
 		<>
 			<Navbar expand='md' className='mb-3 pt-3 nav-color'>
@@ -50,66 +62,40 @@ export const NavBar = (props) => {
 						</Offcanvas.Header>
 						<Offcanvas.Body>
 							<Nav className='justify-content-around flex-grow-1 pe-3'>
-								<NavDropdown
-									title='Men COLLECTIONS'
-									id={`offcanvasNavbarDropdown-expand-xs`}>
-									<NavDropdown.Item className='text-center' href='#action3'>
-										MEN WEAR
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action4'>
-										SALE
-									</NavDropdown.Item>
-								</NavDropdown>
-								<NavDropdown
-									title='WOMEN COLLECTIONS'
-									id={`offcanvasNavbarDropdown-expand-xs`}>
-									<NavDropdown.Item className='text-center' href='#action3'>
-										BRIDAL
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action4'>
-										BRIDAL
-									</NavDropdown.Item>
+								<select onChange={(event) => handleChange(event.target.value)}>
+									<option disabled selected>
+										Men Collections
+									</option>
+									{navigationPaths.menURLs.map((item, index) => {
+										return <option value={item.url}>{item.LABEL}</option>;
+									})}
+								</select>
+								<select onChange={(event) => handleChange(event.target.value)}>
+									<option disabled selected>
+										Women Collections
+									</option>
+									{navigationPaths.womenURLs.map((item, index) => {
+										return <option value={item.url}>{item.LABEL}</option>;
+									})}
+								</select>
+								<select onChange={(event) => handleChange(event.target.value)}>
+									<option disabled selected>
+										Jewelry Collections
+									</option>
+									{navigationPaths.jewelryURLs.map((item, index) => {
+										return <option value={item.url}>{item.LABEL}</option>;
+									})}
+								</select>
 
-									<NavDropdown.Item className='text-center' href='#action5'>
-										SUITS
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action5'>
-										LEHANGAS
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action5'>
-										GHARARAS
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action5'>
-										BRIDESMAIDS
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action5'>
-										SALE
-									</NavDropdown.Item>
-								</NavDropdown>
-								<NavDropdown
-									title='JEWELRY COLLECTIONS'
-									id={`offcanvasNavbarDropdown-expand-xs`}>
-									<NavDropdown.Item className='text-center' href='#action3'>
-										CHOKERS
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action4'>
-										NECKLACE
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action5'>
-										EARINGS
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action5'>
-										BANGLES
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action5'>
-										RINGS
-									</NavDropdown.Item>
-									<NavDropdown.Item className='text-center' href='#action5'>
-										MATHA PATTI & MANGTIKKA
-									</NavDropdown.Item>
-								</NavDropdown>
 								<div className='ml-5 d-flex '>
-									<div style={{ width: "200px" }}>sdf</div>
+									<div style={{ width: "200px" }}>
+										<FontAwesomeIcon
+											size='lg'
+											style={{ color: "white" }}
+											icon={faCartArrowDown}
+										/>
+										{" " + result.length} items
+									</div>
 									<div className='w-50'>dsfs</div>
 								</div>
 							</Nav>

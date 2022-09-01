@@ -20,6 +20,7 @@ import { Earings } from "./components/jewelry/earings/Earings";
 import { Bangles } from "./components/jewelry/bangles/Bangles";
 import { Rings } from "./components/jewelry/rings/Rings";
 import { Mathas } from "./components/jewelry/mathas/Mathas";
+import { URLLIST } from "./constants/UrlsList";
 
 /**
  * @author
@@ -31,9 +32,24 @@ export const App = (props) => {
 		<div>
 			<NavBar />
 			<Routes>
+				{/* {URLLIST.map((item, index) => {
+					try {
+						let path = item.importPath;
+						let DynamicComponent = require(path);
+						return (
+							<Route
+								key={index}
+								path={item.urlPath}
+								element={() => <DynamicComponent />}
+							/>
+						);
+					} catch (e) {}
+				})} */}
+
 				<Route path='/' element={<LandingPage />} />
 				<Route path='MenCloths' element={<MenList />} />
 				<Route path='MenCloths/viewDetails/:id' element={<MenDetails />} />
+				<Route path='MenSales/viewSalesDetails/:id' element={<MenDetails />} />
 				<Route path='MenSales' element={<MenSales />} />
 				<Route path='bridesList' element={<Brides />} />
 				<Route path='suitsList' element={<Suits />} />
@@ -48,7 +64,6 @@ export const App = (props) => {
 				<Route path='RingsCollection' element={<Rings />} />
 				<Route path='MathasCollection' element={<Mathas />} />
 			</Routes>
-
 			<Footer />
 		</div>
 	);
