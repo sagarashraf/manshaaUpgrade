@@ -7,3 +7,14 @@
 	transition: all 0.5s ease-in-out;
 	color: white !important;
 }
+.dropdown-design {
+	word-wrap: normal;
+	border-radius: 10px !important;
+	width: 15% !important;
+	background-color: #b7a684 !important;
+	padding-left: 10px !important;
+	padding-right: 10px !important;
+	font-size: 14px !important;
+	font-weight: 700 !important;
+	height: 40px;
+}

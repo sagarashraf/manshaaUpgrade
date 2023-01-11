@@ -4,6 +4,7 @@ import { Card, Col, Container, Row, Button } from "react-bootstrap";
 import "./MenSales.css";
 import Anime from "react-anime";
 import { Link } from "react-router-dom";
+import { NavBar } from "../../navbar/NavBar";
 
 /**
  * @author
@@ -24,6 +25,7 @@ export const MenSales = (props) => {
 	}, []);
 	return (
 		<Container fluid>
+			<NavBar />
 			<Row className=' px-2 mt-5 mb-5'>
 				{menClothsList.map((item, index) => {
 					return (

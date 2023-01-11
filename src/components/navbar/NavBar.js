@@ -10,13 +10,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
 	faUser,
-	faCartPlus,
 	faCartArrowDown,
+	faCartPlus,
 } from "@fortawesome/fontawesome-free-solid";
 import "./NavBar.css";
 import { navigationPaths } from "../../constants/navigation";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import { Register } from "../register/Register";
 /**
  * @author
  * @function NavBar
@@ -29,6 +30,8 @@ export const NavBar = (props) => {
 	}
 	const result = useSelector((state) => state.cartBucket);
 	console.log("redux full state", result);
+	const result1 = useSelector((state) => state.RegistrationModalState);
+	console.log("modal full state", result1);
 	return (
 		<>
 			<Navbar expand='md' className='mb-3 pt-3 nav-color'>
@@ -62,7 +65,9 @@ export const NavBar = (props) => {
 						</Offcanvas.Header>
 						<Offcanvas.Body>
 							<Nav className='justify-content-around flex-grow-1 pe-3'>
-								<select onChange={(event) => handleChange(event.target.value)}>
+								<select
+									className='dropdown-design '
+									onChange={(event) => handleChange(event.target.value)}>
 									<option disabled selected>
 										Men Collections
 									</option>
@@ -70,7 +75,9 @@ export const NavBar = (props) => {
 										return <option value={item.url}>{item.LABEL}</option>;
 									})}
 								</select>
-								<select onChange={(event) => handleChange(event.target.value)}>
+								<select
+									className='dropdown-design '
+									onChange={(event) => handleChange(event.target.value)}>
 									<option disabled selected>
 										Women Collections
 									</option>
@@ -78,7 +85,9 @@ export const NavBar = (props) => {
 										return <option value={item.url}>{item.LABEL}</option>;
 									})}
 								</select>
-								<select onChange={(event) => handleChange(event.target.value)}>
+								<select
+									className='dropdown-design '
+									onChange={(event) => handleChange(event.target.value)}>
 									<option disabled selected>
 										Jewelry Collections
 									</option>
@@ -87,16 +96,34 @@ export const NavBar = (props) => {
 									})}
 								</select>
 
-								<div className='ml-5 d-flex '>
+								<div className='ml-5 d-flex pt-2'>
 									<div style={{ width: "200px" }}>
-										<FontAwesomeIcon
-											size='lg'
-											style={{ color: "white" }}
-											icon={faCartArrowDown}
-										/>
-										{" " + result.length} items
+										<div className='mb-0 fw-bold '>
+											<FontAwesomeIcon
+												size='lg'
+												style={{ color: "white" }}
+												icon={faCartPlus}
+											/>{" "}
+											{" " + result.length} Items
+										</div>
 									</div>
-									<div className='w-50'>dsfs</div>
+
+									{result.length != 0 && (
+										<div className='w-50'>
+											<Link style={{ color: "white" }} to={"/CartView"}>
+												{" "}
+												<FontAwesomeIcon
+													size='lg'
+													style={{ color: "white" }}
+													icon={faCartArrowDown}
+												/>{" "}
+												View Cart
+											</Link>
+										</div>
+									)}
+									<div className='w-50'>
+										<Register />
+									</div>
 								</div>
 							</Nav>
 						</Offcanvas.Body>

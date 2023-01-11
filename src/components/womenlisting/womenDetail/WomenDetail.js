@@ -4,17 +4,17 @@ import { Card, Col, Container, Row, Image, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { ColorModal } from "../../common/ColorModal";
 import { MeasurementModal } from "../../common/MeasurementModal";
-import "./MenDetails.css";
+import "../../menList/menDetails/MenDetails.css";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../redux/CartBucketAction";
 import { Toaster, toast } from "react-hot-toast";
 import { NavBar } from "../../navbar/NavBar";
 /**
  * @author
- * @function MenDetails
+ * @function WomenDetail
  **/
 
-export const MenDetails = (props) => {
+export const WomenDetail = (props) => {
 	const result = useSelector((state) => state.MeasurementControl);
 	console.log("redux full state of measure", result);
 	const dispatched = useDispatch();
@@ -27,7 +27,7 @@ export const MenDetails = (props) => {
 		// declare the data fetching function
 		const fetchData = async () => {
 			const data = await axios.get(
-				`http://localhost:5000/men/menDetails/${params.id}`
+				`http://localhost:5000/women/WomenDetails/${params.id}`
 			);
 			console.log(data);
 			setDetails(data.data[0]);
@@ -54,7 +54,6 @@ export const MenDetails = (props) => {
 	return (
 		<>
 			<NavBar />
-
 			<Container>
 				<Toaster position='top-center' reverseOrder={false} />
 				<MeasurementModal

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Card, Col, Container, Row, Button } from "react-bootstrap";
+import { NavBar } from "../../navbar/NavBar";
 import "./WomenSales.css";
 
 /**
@@ -22,6 +23,7 @@ export const WomenSales = (props) => {
 	}, []);
 	return (
 		<Container fluid>
+			<NavBar />
 			<Row className=' px-2 mt-5 mb-5'>
 				{ClothsList.map((item, index) => {
 					return (

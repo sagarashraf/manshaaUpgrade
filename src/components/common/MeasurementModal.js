@@ -11,14 +11,19 @@ import {
 import { ColorModal } from "./ColorModal";
 import "./MeasurementModal.css";
 import { SketchPicker, BlockPicker } from "react-color";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getMeasurement } from "../../redux/MeasurementAction";
+import { Formik, Field, ErrorMessage } from "formik";
+import { MeasurementSchema } from "./MeasurementSchema";
+import { MeasurementValues } from "./MeasurementValues";
+import { addToCart } from "../../redux/CartBucketAction";
 /**
  * @author
  * @function MeasurementModal
  **/
 export const MeasurementModal = (props) => {
 	const dispatched = useDispatch();
+	const result = useSelector((state) => state.MeasurementControl);
 	const [sketchPickerColor, setSketchPickerColor] = useState({
 		r: "241",
 		g: "112",
@@ -27,39 +32,20 @@ export const MeasurementModal = (props) => {
 	});
 	const { r, g, b, a } = sketchPickerColor;
 	const [Summary, setSummary] = useState(false);
-	const [Shoulder, setShoulder] = useState("");
-	const [Armhole, setArmhole] = useState("");
-	const [BustRound, setBustRound] = useState("");
-	const [CalfRound, setCalfRound] = useState("");
-	const [WaistRound, setWaistRound] = useState("");
-	const [ThighRound, setThighRound] = useState("");
-	const [KneeRound, setKneeRound] = useState("");
-	const [HipRound, setHipRound] = useState("");
-	const [AnkleRound, setAnkleRound] = useState("");
-	const [AcrossFront, setAcrossFront] = useState("");
-	const [UpperBust, setUpperBust] = useState("");
-	const [UnderBust, setUnderBust] = useState("");
-	const [MidThigh, setMidThigh] = useState("");
-	const [LowWaist, setLowWaist] = useState("");
-	const submit = () => {
-		let obj = {
-			Shoulder: Shoulder,
-			Armhole: Armhole,
-			BustRound: BustRound,
-			CalfRound: CalfRound,
-			WaistRound: WaistRound,
-			ThighRound: ThighRound,
-			KneeRound: KneeRound,
-			HipRound: HipRound,
-			AnkleRound: AnkleRound,
-			AcrossFront: AcrossFront,
-			UpperBust: UpperBust,
-			UnderBust: UnderBust,
-			MidThigh: MidThigh,
-			LowWaist: LowWaist,
-			Color: `rgba(${r},${g},${b},${a})`,
-		};
-		dispatched(getMeasurement(obj));
+
+	const submit = async (values) => {
+		console.log("fggf", values);
+		let Color = `rgba(${r},${g},${b},${a})`;
+		values.color = Color;
+		values.title = props.title;
+		values.price = props.price;
+		values.category = props.cat;
+		values.description = props.des.description;
+		await dispatched(getMeasurement(values));
+		// let orderWithMesure = { ...values, ...result[0] };
+		// await dispatched(addToCart(orderWithMesure));
+		console.log("redux full state of measure in function", result);
+		props.measurementflag();
 	};
 	return (
 		<div>
@@ -71,218 +57,372 @@ export const MeasurementModal = (props) => {
 				centered>
 				<Modal.Header className='text-center' closeButton>
 					<Modal.Title id='contained-modal-title-vcenter'>
-						Add Measurement
+						{props.title}, Price: {props.price}
 					</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Row>
-						<Col sm={4} xs={12}>
+						<Col sm={8} xs={12}>
 							<h6 className='mb-4'>Please Enter your Measurements!</h6>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Shoulder:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setShoulder(e.target.value)}
-									type='number'
-									value={Shoulder}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Armhole:
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setArmhole(e.target.value)}
-									type='number'
-									value={Armhole}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Bust Round:
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setBustRound(e.target.value)}
-									type='number'
-									value={BustRound}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
+							<Formik
+								validationSchema={MeasurementSchema}
+								onSubmit={(values) => submit(values)}
+								initialValues={MeasurementValues}>
+								{({
+									handleSubmit,
+									handleChange,
+									handleBlur,
+									values,
+									touched,
+									isValid,
+									errors,
+								}) => (
+									<Form noValidate onSubmit={handleSubmit}>
+										<Row className='mb-3'>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikUsername'>
+												<Form.Label>Shoulder</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Shoulder'
+														aria-describedby='inputGroupPrepend'
+														name='Shoulder'
+														value={values.Shoulder}
+														onChange={handleChange}
+														isInvalid={!!errors.Shoulder}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.Shoulder}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikHipRound'>
+												<Form.Label>Hip Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Hip Round'
+														aria-describedby='inputGroupPrepend'
+														name='HipRound'
+														value={values.HipRound}
+														onChange={handleChange}
+														isInvalid={!!errors.HipRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.HipRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikArmhole'>
+												<Form.Label>Arm hole</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Arm hole'
+														aria-describedby='inputGroupPrepend'
+														name='Armhole'
+														value={values.Armhole}
+														onChange={handleChange}
+														isInvalid={!!errors.Armhole}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.Armhole}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikAnkleRound'>
+												<Form.Label>Ankle Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Ankle Round'
+														aria-describedby='inputGroupPrepend'
+														name='AnkleRound'
+														value={values.AnkleRound}
+														onChange={handleChange}
+														isInvalid={!!errors.AnkleRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.AnkleRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikBustRound'>
+												<Form.Label>Bust Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Bust Round'
+														aria-describedby='inputGroupPrepend'
+														name='BustRound'
+														value={values.BustRound}
+														onChange={handleChange}
+														isInvalid={!!errors.BustRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.BustRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikAcrossFront'>
+												<Form.Label>Across Front</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Across Front'
+														aria-describedby='inputGroupPrepend'
+														name='AcrossFront'
+														value={values.AcrossFront}
+														onChange={handleChange}
+														isInvalid={!!errors.AcrossFront}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.AcrossFront}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikCalfRound'>
+												<Form.Label>Calf Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Calf Round'
+														aria-describedby='inputGroupPrepend'
+														name='CalfRound'
+														value={values.CalfRound}
+														onChange={handleChange}
+														isInvalid={!!errors.CalfRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.CalfRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikUpperBustRound'>
+												<Form.Label>Upper Bust Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Upper Bust Round'
+														aria-describedby='inputGroupPrepend'
+														name='UpperBustRound'
+														value={values.UpperBustRound}
+														onChange={handleChange}
+														isInvalid={!!errors.UpperBustRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.UpperBustRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikWaistRound'>
+												<Form.Label>Waist Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Waist Round'
+														aria-describedby='inputGroupPrepend'
+														name='WaistRound'
+														value={values.WaistRound}
+														onChange={handleChange}
+														isInvalid={!!errors.WaistRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.WaistRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikUnderBustRound'>
+												<Form.Label>Under Bust Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Under Bust Round'
+														aria-describedby='inputGroupPrepend'
+														name='UnderBustRound'
+														value={values.UnderBustRound}
+														onChange={handleChange}
+														isInvalid={!!errors.UnderBustRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.UnderBustRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikThighRound'>
+												<Form.Label>Thigh Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Thigh Round'
+														aria-describedby='inputGroupPrepend'
+														name='ThighRound'
+														value={values.ThighRound}
+														onChange={handleChange}
+														isInvalid={!!errors.ThighRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.ThighRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikMidThighRound'>
+												<Form.Label>Mid Thigh Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Mid Thigh Round'
+														aria-describedby='inputGroupPrepend'
+														name='MidThighRound'
+														value={values.MidThighRound}
+														onChange={handleChange}
+														isInvalid={!!errors.MidThighRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.MidThighRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikKneeRound'>
+												<Form.Label>Knee Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Knee Round'
+														aria-describedby='inputGroupPrepend'
+														name='KneeRound'
+														value={values.KneeRound}
+														onChange={handleChange}
+														isInvalid={!!errors.KneeRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.KneeRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
 
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Calf Round:
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setCalfRound(e.target.value)}
-									type='number'
-									value={CalfRound}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Waist Round:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setWaistRound(e.target.value)}
-									type='number'
-									value={WaistRound}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Thigh Round:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setThighRound(e.target.value)}
-									type='number'
-									value={ThighRound}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Knee Round:
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setKneeRound(e.target.value)}
-									type='number'
-									value={KneeRound}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
+											<Form.Group
+												as={Col}
+												md='4'
+												controlId='validationFormikLowWaistRound'>
+												<Form.Label>Low Waist Round</Form.Label>
+												<InputGroup hasValidation>
+													<Form.Control
+														type='text'
+														placeholder='Low Waist Round'
+														aria-describedby='inputGroupPrepend'
+														name='LowWaistRound'
+														value={values.LowWaistRound}
+														onChange={handleChange}
+														isInvalid={!!errors.LowWaistRound}
+													/>
+													<InputGroup.Text id='inputGroupPrepend'>
+														In.
+													</InputGroup.Text>
+													<Form.Control.Feedback type='invalid'>
+														{errors.LowWaistRound}
+													</Form.Control.Feedback>
+												</InputGroup>
+											</Form.Group>
+										</Row>
+
+										<div className='text-center mt-5 mb-4'>
+											<Button
+												variant='success'
+												className='submit-button-meaurement'
+												type='submit'>
+												Confirm Measurements
+											</Button>
+											<Button
+												variant='dark'
+												className='submit-button-meaurement'
+												onClick={props.onHide}>
+												Close
+											</Button>
+										</div>
+									</Form>
+								)}
+							</Formik>
 						</Col>
-						<Col sm={4} xs={12}>
-							<h6 className='mb-4'>Please Enter your Measurements!</h6>
 
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Hip Round:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setHipRound(e.target.value)}
-									type='number'
-									value={HipRound}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Ankle Round:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setAnkleRound(e.target.value)}
-									type='number'
-									value={AnkleRound}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Across Front:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setAcrossFront(e.target.value)}
-									type='number'
-									value={AcrossFront}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Upper Bust Round:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setUpperBust(e.target.value)}
-									type='number'
-									value={UpperBust}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Under Bust Round:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setUnderBust(e.target.value)}
-									type='number'
-									value={UnderBust}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Mid Thigh Round:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setMidThigh(e.target.value)}
-									type='number'
-									value={MidThigh}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-
-							<InputGroup className='mb-4'>
-								<InputGroup.Text
-									className='width-custom-class'
-									id='basic-addon1'>
-									Low Waist Round:{" "}
-								</InputGroup.Text>
-								<Form.Control
-									onChange={(e) => setLowWaist(e.target.value)}
-									type='number'
-									value={LowWaist}
-									min='0.1'
-								/>
-								<InputGroup.Text id='basic-addon2'>in.</InputGroup.Text>
-							</InputGroup>
-						</Col>
 						<Col sm={4} xs={12}>
 							<div className=''>
 								<h6>Select Color : {`rgba(${r},${g},${b},${a})`}</h6>
@@ -306,82 +446,10 @@ export const MeasurementModal = (props) => {
 							</div>
 						</Col>
 					</Row>
-					<Row>
-						<Col>
-							{Summary && (
-								<Form.Group
-									className='mb-3'
-									controlId='exampleForm.ControlTextarea1'>
-									<Form.Label>Measurement Summary</Form.Label>
-									<Card>
-										<Card.Body>
-											<Row>
-												<Col sm={4} xs={12}>
-													Shoulder: {Shoulder}
-												</Col>
-												<Col sm={4} xs={12}>
-													Armhole: {Armhole}
-												</Col>
-												<Col sm={4} xs={12}>
-													BustRound: {BustRound}
-												</Col>
-												<Col sm={4} xs={12}>
-													CalfRound: {CalfRound}
-												</Col>
-												<Col sm={4} xs={12}>
-													WaistRound: {WaistRound}
-												</Col>
-												<Col sm={4} xs={12}>
-													ThighRound: {ThighRound}
-												</Col>
-												<Col sm={4} xs={12}>
-													KneeRound: {KneeRound}
-												</Col>
-												<Col sm={4} xs={12}>
-													HipRound: {HipRound}
-												</Col>
-												<Col sm={4} xs={12}>
-													AnkleRound: {AnkleRound}
-												</Col>
-												<Col sm={4} xs={12}>
-													AcrossFront: {AcrossFront}
-												</Col>
-												<Col sm={4} xs={12}>
-													UpperBust: {UpperBust}
-												</Col>
-												<Col sm={4} xs={12}>
-													UnderBust: {UnderBust}
-												</Col>
-												<Col sm={4} xs={12}>
-													MidThigh: {MidThigh}
-												</Col>
-												<Col sm={4} xs={12}>
-													LowWaist: {LowWaist}
-												</Col>
-												<Col sm={4} xs={12} className='d-flex '>
-													<div>Color: </div>
-													<div
-														className='mb-4 ml-5'
-														style={{
-															backgroundColor: `rgba(${r},${g},${b},${a})`,
-															width: "50%",
-															height: 25,
-															border: "2px solid white",
-														}}></div>
-												</Col>
-											</Row>
-										</Card.Body>
-									</Card>
-								</Form.Group>
-							)}
-						</Col>
-					</Row>
 				</Modal.Body>
-				<Modal.Footer>
-					<Button onClick={props.onHide}>Close</Button>
-					<Button onClick={() => setSummary(true)}>View Summary</Button>
+				{/* <Modal.Footer>
 					<Button onClick={submit}>Submit</Button>
-				</Modal.Footer>
+				</Modal.Footer> */}
 			</Modal>
 		</div>
 	);

@@ -8,7 +8,7 @@ export const addToCart = (data) => {
 	};
 };
 export const removeToCart = (data) => {
-	console.log("Action called remove", data);
+	console.log("Action called removes", data);
 	return {
 		type: actionTypes.RemoveToCart,
 		data: data,

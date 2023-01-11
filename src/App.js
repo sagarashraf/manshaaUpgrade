@@ -21,6 +21,12 @@ import { Bangles } from "./components/jewelry/bangles/Bangles";
 import { Rings } from "./components/jewelry/rings/Rings";
 import { Mathas } from "./components/jewelry/mathas/Mathas";
 import { URLLIST } from "./constants/UrlsList";
+import { Register } from "./components/register/Register";
+import { Testing } from "./components/Testing";
+import { WomenDetail } from "./components/womenlisting/womenDetail/WomenDetail";
+import { CardView } from "./components/CardView/CardView";
+import { OrdersList } from "./components/Admin/OrdersList/OrdersList";
+import { UserDetail } from "./components/userDetail/UserDetail";
 
 /**
  * @author
@@ -30,39 +36,41 @@ import { URLLIST } from "./constants/UrlsList";
 export const App = (props) => {
 	return (
 		<div>
-			<NavBar />
 			<Routes>
-				{/* {URLLIST.map((item, index) => {
-					try {
-						let path = item.importPath;
-						let DynamicComponent = require(path);
-						return (
-							<Route
-								key={index}
-								path={item.urlPath}
-								element={() => <DynamicComponent />}
-							/>
-						);
-					} catch (e) {}
-				})} */}
-
 				<Route path='/' element={<LandingPage />} />
 				<Route path='MenCloths' element={<MenList />} />
 				<Route path='MenCloths/viewDetails/:id' element={<MenDetails />} />
 				<Route path='MenSales/viewSalesDetails/:id' element={<MenDetails />} />
 				<Route path='MenSales' element={<MenSales />} />
 				<Route path='bridesList' element={<Brides />} />
+				<Route path='bridesList/WomenDetails/:id' element={<WomenDetail />} />
 				<Route path='suitsList' element={<Suits />} />
+				<Route path='suitsList/WomenDetails/:id' element={<WomenDetail />} />
 				<Route path='LehangasList' element={<Lehangas />} />
+				<Route path='LehangasList/WomenDetails/:id' element={<WomenDetail />} />
 				<Route path='GhararaList' element={<Gharara />} />
+				<Route path='GhararaList/WomenDetails/:id' element={<WomenDetail />} />
 				<Route path='BridesMaidesList' element={<BridesMaides />} />
+				<Route
+					path='BridesMaidesList/WomenDetails/:id'
+					element={<WomenDetail />}
+				/>
 				<Route path='WomenSalesListing' element={<WomenSales />} />
+				<Route
+					path='WomenSalesListing/WomenDetails/:id'
+					element={<WomenDetail />}
+				/>
 				<Route path='ChokersCollection' element={<Chokers />} />
 				<Route path='NecklaceCollection' element={<Necklace />} />
 				<Route path='EaringsCollection' element={<Earings />} />
 				<Route path='BanglesCollection' element={<Bangles />} />
 				<Route path='RingsCollection' element={<Rings />} />
 				<Route path='MathasCollection' element={<Mathas />} />
+				<Route path='/CartView' element={<CardView />} />
+				<Route path='/admin/orderList' element={<OrdersList />} />
+				<Route path='/UserDetail/:id' element={<UserDetail />} />
+
+				{/* <Route path='*' element={<Testing />} /> */}
 			</Routes>
 			<Footer />
 		</div>

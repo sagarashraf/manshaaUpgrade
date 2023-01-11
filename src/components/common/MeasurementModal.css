@@ -9,3 +9,8 @@
 .summary-grides-width {
 	width: 50%;
 }
+.submit-button-meaurement {
+	width: 200px !important;
+	margin-right: 10px;
+	border-radius: 15px !important;
+}

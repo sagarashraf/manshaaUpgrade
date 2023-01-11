@@ -1,0 +1,39 @@
+.card-registration {
+	border-radius: 10px !important;
+	border: none !important;
+}
+
+.header-sign-up {
+	background-color: #a19685 !important;
+	border-radius: 0% !important;
+	color: white !important;
+}
+
+.footer-sign-up {
+	background-color: #a19685 !important;
+	border-radius: 0% !important;
+	color: white !important;
+}
+.ruler-registration {
+	width: 100%;
+	height: 20px;
+	border-bottom: 1px solid black;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+.text-registration {
+	font-size: 25px;
+	background-color: #86775f !important ;
+	color: white;
+	padding: 0 10px;
+}
+.login-class {
+	color: blue;
+	cursor: pointer;
+}
+
+.pointer-class {
+	cursor: pointer;
+}
